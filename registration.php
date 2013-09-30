@@ -81,6 +81,14 @@ $count=mysql_num_rows($resultset);
 			$_SESSION['bad4'] = '';
 			}
 			?></p>
+			<!-- checks for 8-char password -->
+				<p style="color:yellow;font-weight:bold;"><?php
+			if(isset($_SESSION['bad5'])){
+			echo($_SESSION['bad5']);
+			$_SESSION['bad5'] = '';
+			}
+			?></p>
+		
 		
 
 				<form id="reg_form" action="processing/regPro.php" method="post" enctype="multipart/form-data">

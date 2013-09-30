@@ -104,6 +104,10 @@ if($count >0){
 				 $_SESSION['bad3'] = 'ERROR: Not a Valid Email!!';  
 				  header("Location: ../registration.php");
 			
+			//checks to see if password is 8 minimum
+			}elseif(strlen($_POST['password']) < 7){
+				 $_SESSION['bad5'] = 'ERROR: Password is too short (8 characters minimum)!!';  
+				  header("Location: ../registration.php");
 					
 	
 
