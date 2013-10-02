@@ -342,12 +342,16 @@ if(isset($_SESSION['userid']) && isset($_SESSION['userType']) )
 					<span style="color:#670000">Date Drafted :</span> <?php echo $row['dateDrafted'];?> 
 					<span style="color:#670000">Status:</span> <?php echo $row['status'];?> &nbsp 
 					<?php if ($row['status'] != "accepted"){ ?>	
-					<a href="#" onclick="toggleContract('<?php echo $row["contractId"].'c'?>');"><img src="images/view.png" width="20px" height="20px"/></a> &nbsp 
-					<a onclick="return confirm('Are you sure you want to delete?')" href="processing/deleteContract.php?c=<?php echo $row['contractId'];?>"><img src="images/delete.png" width="20px" height="20px"/></a>
-					<?php } else echo $row["dateConfirmed"]." &nbsp <a href ='pdf/Contract/Contract.php?c=".$row['contractId']."' target='_blank'>VIEW</a>"; ?>
+						<a href="#" onclick="toggleContract('<?php echo $row["contractId"].'c'?>');">
+							<img src="images/view.png" width="20px" height="20px"/></a> &nbsp 
+						<a onclick="return confirm('Are you sure you want to delete?')" href="processing/deleteContract.php?c=<?php echo $row['contractId'];?>">
+							<img src="images/delete.png" width="20px" height="20px"/></a>
+					<?php } else 
+							echo $row["dateConfirmed"]." &nbsp <a href ='pdf/Contract/Contract.php?c=".$row['contractId']."' target='_blank'>VIEW</a>"; ?>
 				</li>
 			</ul>
 		</div>
+		
 		<!--clause list-->
 		<div id="<?php echo $row['contractId'].'c';?>" class="clauses">
 			<?php
@@ -361,6 +365,7 @@ if(isset($_SESSION['userid']) && isset($_SESSION['userType']) )
 						<span style="color:#670000"><?php echo $row1['title'];?></span> &nbsp 
 						<a href="#" onclick="toggleClause('<?php echo $row1["clauseId"].'cl'?>');" ><img src="images/view.png" width="20px" height="20px"/></a> &nbsp 
 						 <?php 	$clid = $row1['clauseId']; 
+						        
 								$rs = mysql_query("SELECT * FROM tblcritique t, tbllawyer l WHERE t.lawyer = l.lawyerId AND clause = '$clid' AND l.client = '$uid' ORDER BY critiqueId DESC LIMIT 0, 5"); 
 								$count=mysql_num_rows($rs); 
 								if ($count != 0) 

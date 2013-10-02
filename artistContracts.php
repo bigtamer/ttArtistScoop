@@ -335,9 +335,12 @@ if(isset($_SESSION['userid']) && isset($_SESSION['userType']))
 						<span style="color:#670000">Drafted :</span> <?php echo $row['dateDrafted'];?> 
 						<span style="color:#670000">Status:</span> <?php echo $row['status'];?> &nbsp
 						<?php if ($row['status'] != "accepted"){ ?>		
-						<a href="#" onclick="toggleContract('<?php echo $row["contractId"].'c'?>');"><img src="images/view.png" width="20px" height="20px"/></a> &nbsp 										
-						<a href="processing/acceptContract.php?c=<?php echo $row['contractId'];?>&d=<?php echo $row['drafter'];?>"><img src="images/confirm.png" width="25px" height="20px"/></a>
-						<?php } else echo $row["dateConfirmed"]." &nbsp <a href ='pdf/Contract/Contract.php?c=".$row['contractId']."' target='_blank'>VIEW</a>"; ?>
+								<a href="#" onclick="toggleContract('<?php echo $row["contractId"].'c'?>');">
+									<img src="images/view.png" width="20px" height="20px"/></a> &nbsp 										
+								<a href="processing/acceptContract.php?c=<?php echo $row['contractId'];?>&d=<?php echo $row['drafter'];?>">
+									<img src="images/confirm.png" width="25px" height="20px"/></a>
+						<?php } else 
+								echo $row["dateConfirmed"]." &nbsp <a href ='pdf/Contract/Contract.php?c=".$row['contractId']."' target='_blank'>VIEW</a>"; ?>
 					</li>
 				</ul>
 			</div>
@@ -354,6 +357,7 @@ if(isset($_SESSION['userid']) && isset($_SESSION['userType']))
 							<span style="color:#670000"><?php echo $row1['title'];?></span> &nbsp 
 							<a href="#" onclick="toggleClause('<?php echo $row1["clauseId"].'cl'?>');" ><img src="images/view.png" width="20px" height="20px"/></a> &nbsp 
 							 <?php 	$clid = $row1['clauseId']; 
+							 
 								$rs = mysql_query("SELECT * FROM tblcritique t, tbllawyer l WHERE t.lawyer = l.lawyerId AND clause = '$clid' AND l.client = '$uid' ORDER BY critiqueId DESC LIMIT 0, 5"); 
 								$count=mysql_num_rows($rs); 
 								if ($count != 0) 
@@ -374,8 +378,8 @@ if(isset($_SESSION['userid']) && isset($_SESSION['userType']))
 							while($row2 = mysql_fetch_array($result2)) 
 							{ ?>
 							<ul>
-								<li>
-									<pre><span style="color:#000"><?php echo $row2['clause'];?></span></pre>
+								<li style="width:500px;">
+									<pre><span style="color:#000;"><?php echo $row2['clause'];?></span></pre>
 								</li>
 							</ul>
 							<?php 
@@ -383,7 +387,7 @@ if(isset($_SESSION['userid']) && isset($_SESSION['userType']))
 								<!--clause comments-->
 								<div class="comments">
 									<h5 style="color:#670000; padding-left:35px">Comments</h5>
-									<ol  id="update<?php echo $row1['clauseId'];?>" class="timeline">
+									<ol  id="update<?php echo $row1['clauseId'];?>" class="timeline" >
 											<?php
 											//values from comment table
 											$result3 = mysql_query("SELECT * FROM tblclcomment c, tbluser u WHERE u.userid = c.commenter AND c.clause='$clid' ORDER BY CLCommentid DESC");
@@ -395,17 +399,18 @@ if(isset($_SESSION['userid']) && isset($_SESSION['userType']))
 													if (isset($_SESSION["userid"])){
 														$comm = $_SESSION["userid"];
 														if ($comm == $row3["commenter"]) {
+														  
 													?>
 													<a onclick="return confirm('Are you sure you want to delete?')" style="float:right; margin-right:15px" href="processing/deleteCcomment.php?s=<?php echo $row3['ClCommentid'];?>"><img src="images/delete.png" width="10px" height="10px"/></a>
 													<?php } } ?>
-											<?php echo $row3["firstName"]?> &nbsp <?php echo $row3["lastName"]?> writes <?php echo $row3["ClComment"]?>
+											<p style="font-size:11pt;"><b><?php echo $row3["firstName"] ." "?><?php echo $row3["lastName"]?> writes:</b> <?php echo $row3["ClComment"]?> 
 											<?php
 											if ($row3["agree"] == 1)
 											{
 											?>
-											<img src = "images/agree.png" width="20px" height ="20px"/>
+											<img src = "images/agree.png" width="20px" height ="20px"/><?php echo $row3["dateposted"]?></p><p>
 											<?php }else{ ?>
-											<img src = "images/disagree.png" width="20px" height ="20px"/>
+											<img src = "images/disagree.png" width="20px" height ="20px"/><?php echo $row3["dateposted"]?></p>
 											<?php } ?>
 											</li>
 											<?php

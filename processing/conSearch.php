@@ -28,9 +28,13 @@ while($srow = mysql_fetch_array($rsearch))
 					<span style="color:#670000">Date Drafted :</span> <?php echo $srow['dateDrafted'];?> 
 					<span style="color:#670000">Status:</span> <?php echo $srow['status'];?> &nbsp 
 					<?php if ($srow['status'] != "accepted"){ ?>	
-					<a href="#" onclick="toggleContract('<?php echo $srow["contractId"].'a'?>');"><img src="images/view.png" width="20px" height="20px"/></a> &nbsp 
-					<a onclick="return confirm('Are you sure you want to delete?')" href="processing/deleteContract.php?c=<?php echo $srow['contractId'];?>"><img src="images/delete.png" width="20px" height="20px"/></a>
-					<?php } else echo $srow["dateConfirmed"]." &nbsp <a href ='pdf/Contract/Contract.php?c=".$srow['contractId']."' target='_blank'>Build</a>"; ?>
+						<a href="#" onclick="toggleContract('<?php echo $srow["contractId"].'a'?>');">
+							<img src="images/view.png" width="20px" height="20px"/></a> &nbsp 
+						<a onclick="return confirm('Are you sure you want to delete?')" href="processing/deleteContract.php?c=<?php echo $srow['contractId'];?>">
+							<img src="images/delete.png" width="20px" height="20px"/></a>
+					<?php } else 
+						  echo $srow["dateConfirmed"]." &nbsp <a href ='pdf/Contract/Contract.php?c=".$srow['contractId']."' target='_blank'>Build</a>"; 
+				    ?>
 				</li>
 			</ul>
 		</div>
