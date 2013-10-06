@@ -94,11 +94,11 @@ $count2 = mysql_num_rows($resultset8);
 if($count >0){	
 			$row = mysql_fetch_array($resultset1);
 			//checks to see if email address already exists
-			$_SESSION['error'] = 'email already exist. Please sign up with a new email address';
+			$_SESSION['error'] = 'email already exists. Please sign up with a new email address';
 			header("Location: ../registration.php");
 			
 							
-			//checks for blanks
+			//checks for blank emails
 			}elseif($_POST['email']==""){
 			 $_SESSION['bad4'] = 'ERROR: Email field was left blank!!';  
 			header("Location: ../registration.php");
@@ -118,8 +118,9 @@ if($count >0){
 			}elseif($count2 >0){
 			$row2 = mysql_fetch_array($resultset8);
 			//checks to see if Stage Name already exists
-			$_SESSION['error8'] = 'That Stage name already exist. Please sign up with a new Stage name';
+			$_SESSION['error8'] = 'That Stage name already exists. Please sign up with a new Stage name';
 			header("Location: ../registration.php");
+
 			
 
 			}else
@@ -154,8 +155,7 @@ if($count >0){
 					$headers .= "MIME-Version: 1.0\r\n";
 					$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 					mail($to,$subject,$message,$headers);
-					$_SESSION['good1'] = "<a style='color:yellow;font-weight:bold;' href=$email>$email</a>";
-					$_SESSION['good1'] .= ' is a valid! Please visit your email account for your confirmation link!';  
+					$_SESSION['good1'] = "<p style='color:blue;font-weight:bold;'>$email is a valid! Please visit your email account for your confirmation link!</p>";
 					header("Location: ../home.php");
 				}else{
 						$sql5="INSERT INTO `tbluser`(`userid`, `firstName`, `lastName`, `email`, `password`, `dSigniture`, `userType`, `active`, `dateAdded`) 
@@ -182,8 +182,7 @@ if($count >0){
 						$headers .= "MIME-Version: 1.0\r\n";
 						$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 						mail($to,$subject,$message,$headers);
-						$_SESSION['good1'] = "<a style='color:yellow;font-weight:bold;' href=$email>$email</a>";
-						$_SESSION['good1'] .= ' is a valid! Please visit your email account for your confirmation link!';  
+						$_SESSION['good1'] = "<p style='color:blue;font-weight:bold;'>$email is a valid! Please visit your email account for your confirmation link!</p>";
 						header("Location: ../home.php");										
 					}
 			}
