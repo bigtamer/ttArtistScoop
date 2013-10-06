@@ -67,6 +67,15 @@ $count=mysql_num_rows($resultset);
 				$_SESSION['error'] = '';
 				}
 				?></p>
+				
+				<!-- checks for duplicate stage names -->
+				<p style="color:yellow;font-weight:bold;"><?php 
+				if(isset($_SESSION['error8'])){
+				echo($_SESSION['error8']);
+				$_SESSION['error8'] = '';
+				}
+				?></p>
+				
 				<!-- checks for invalid email -->
 				<p style="color:yellow;font-weight:bold;"><?php
 			if(isset($_SESSION['bad3'])){

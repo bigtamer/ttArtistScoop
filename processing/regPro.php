@@ -30,6 +30,7 @@ $mth = $_POST['Mth'];
 $day = $_POST['Day'];
 $DOB = $yr."/".$mth."/".$day;
 $bio = $_POST['bio'];
+
 $sname = $_POST['sname'];
 $genre = $_POST['genre'];
 $interest = $_POST['interest'];
@@ -84,15 +85,19 @@ $sql1="SELECT * FROM tbluser where email='$email';";
 $resultset1 = mysql_query($sql1);
 $count = mysql_num_rows($resultset1);
 
+$sql8="SELECT * FROM tblartist where stageName='$sname';";
+$resultset8 = mysql_query($sql8);
+$count2 = mysql_num_rows($resultset8);
 
 
 		
 if($count >0){	
 			$row = mysql_fetch_array($resultset1);
 			//checks to see if email address already exists
-			$_SESSION['error'] = 'Your email already exist. Please sign up with a new email address';
+			$_SESSION['error'] = 'email already exist. Please sign up with a new email address';
 			header("Location: ../registration.php");
 			
+							
 			//checks for blanks
 			}elseif($_POST['email']==""){
 			 $_SESSION['bad4'] = 'ERROR: Email field was left blank!!';  
@@ -109,7 +114,13 @@ if($count >0){
 				 $_SESSION['bad5'] = 'ERROR: Password is too short (8 characters minimum)!!';  
 				  header("Location: ../registration.php");
 					
-	
+			
+			}elseif($count2 >0){
+			$row2 = mysql_fetch_array($resultset8);
+			//checks to see if Stage Name already exists
+			$_SESSION['error8'] = 'That Stage name already exist. Please sign up with a new Stage name';
+			header("Location: ../registration.php");
+			
 
 			}else
 				{
@@ -127,9 +138,12 @@ if($count >0){
 					$result = mysql_query($sql);
 					$row=mysql_fetch_array($result);
 					$uid = $row['uid'];
+					
 					$sql4="INSERT INTO `tblartist`(`artistId`, `gender`, `DOB`, `bio`, `stageName`, `preferedGenre`, `interest`, `experience`, `profilePhoto`, `featured`) 
 							VALUES ('$uid', '$gender', '$DOB', '$bio', '$sname', '$genre', '$interest', '$experience', '$photo', '0');";
 					mysql_query($sql4);
+						
+						
 					move_uploaded_file($_FILES["profilePic"]["tmp_name"],
 					"../images/profiles/" . $photo);
 					}
@@ -140,7 +154,8 @@ if($count >0){
 					$headers .= "MIME-Version: 1.0\r\n";
 					$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 					mail($to,$subject,$message,$headers);
-					$_SESSION['good1'] = 'Email address is a Valid Email! Please visit your email account for your confirmation link';  
+					$_SESSION['good1'] = "<a style='color:yellow;font-weight:bold;' href=$email>$email</a>";
+					$_SESSION['good1'] .= ' is a valid! Please visit your email account for your confirmation link!';  
 					header("Location: ../home.php");
 				}else{
 						$sql5="INSERT INTO `tbluser`(`userid`, `firstName`, `lastName`, `email`, `password`, `dSigniture`, `userType`, `active`, `dateAdded`) 
@@ -167,7 +182,8 @@ if($count >0){
 						$headers .= "MIME-Version: 1.0\r\n";
 						$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 						mail($to,$subject,$message,$headers);
-						$_SESSION['good1'] = 'Email address is a Valid Email! Please visit your email account for your confirmation link';  
+						$_SESSION['good1'] = "<a style='color:yellow;font-weight:bold;' href=$email>$email</a>";
+						$_SESSION['good1'] .= ' is a valid! Please visit your email account for your confirmation link!';  
 						header("Location: ../home.php");										
 					}
 			}
