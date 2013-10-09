@@ -100,9 +100,21 @@ $count3=mysql_num_rows($result2);
 		<div id="content">
 		
 			<div id="featuredwrap" >	
+			
+			
 				<div id="featured" >
+				
+ 
+<script type="text/javascript" src="http://feed.informer.com/widgets/WEMVSSRSUF.js"></script>
+<noscript><a href="http://feed.informer.com/widgets/WEMVSSRSUF.html">"Caribbean Surge RSS feed"</a>
+Powered by <a href="http://feed.informer.com/">RSS Feed Informer</a></noscript>
+  
+  
+  
+		
+				  <!--
 				  <ul class="ui-tabs-nav">
-					<?php
+					<?php /*
 					for($j=0; $j<$count1; $j++){
 					$row1=mysql_fetch_array($result);
 					$y = $j+2;
@@ -126,8 +138,10 @@ $count3=mysql_num_rows($result2);
 							<p><?php echo $row2["bio"];?>....<a href="#" onclick="show(<?php echo $row2["userid"];?>)">read more</a></p>
 						 </div>
 					</div>
-					<?php } ?>
+					<?php } */?>
+				-->	
 				</div>
+			
 			</div>
 		    
 		
@@ -149,6 +163,9 @@ $count3=mysql_num_rows($result2);
 			</div>
 			
 			<div id="featuredinfo">
+			
+
+  
 			   <!-- confirms valid email and reminds you to check email account for your confirmation link -->
 				<p style="color:blue;font-weight:bold;font-size:14pt;"><?php
 				if(isset($_SESSION['good1'])){
