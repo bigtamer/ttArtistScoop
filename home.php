@@ -2,31 +2,43 @@
 session_start(); 
 include "include/dbConnect.php";
 
+/* If this line below is true, means the DB connects successfully:
+
+	if(isset($database)) { echo "true"; } else { echo "false"; }
+	echo "<br />";
+
+	
+
+   If the code below echos on web pages as "It\'s working" with that slash it means that mysql DB is successfully escaping illegal apostrophes:
+
+	echo $database->escape_value("It's working?<br />");
+	
+	
+   How to insert with query() function:
+	// $sql  = "INSERT INTO tableName (id, field1, field2) ";
+	// $sql .= "VALUES (NULL, 'content1', 'content2')";
+	// $result = $database->query($sql);
+
+*/
+
+
 $sql = "SELECT clause FROM tbltemplateclause;";
-
 $resultset = mysql_query($sql);
-
 $count=mysql_num_rows($resultset);
 
 //get featured artist content for small items
 $sql1 = "SELECT * FROM tbluser u, tblartist a WHERE u.userId = a.artistId and a.featured = '1';";
-
 $result = mysql_query($sql1);
-
 $count1=mysql_num_rows($result);
 
 //get featured artist content for large items
 $sql2 = "SELECT * FROM tbluser u, tblartist a WHERE u.userId = a.artistId and a.featured = '1';";
-
 $result1 = mysql_query($sql2);
-
 $count2=mysql_num_rows($result1);
 
 //get recently added music
 $sql3 = "SELECT * FROM tblsample ORDER BY dateadded desc LIMIT 0, 4;";
-
 $result2 = mysql_query($sql3);
-
 $count3=mysql_num_rows($result2);
 ?>
 
@@ -104,17 +116,17 @@ $count3=mysql_num_rows($result2);
 			
 				<div id="featured" >
 				
- 
-<script type="text/javascript" src="http://feed.informer.com/widgets/WEMVSSRSUF.js"></script>
-<noscript><a href="http://feed.informer.com/widgets/WEMVSSRSUF.html">"Caribbean Surge RSS feed"</a>
-Powered by <a href="http://feed.informer.com/">RSS Feed Informer</a></noscript>
-  
+ <!--
+				<script type="text/javascript" src="http://feed.informer.com/widgets/WEMVSSRSUF.js"></script>
+				<noscript><a href="http://feed.informer.com/widgets/WEMVSSRSUF.html">"Caribbean Surge RSS feed"</a>
+				Powered by <a href="http://feed.informer.com/">RSS Feed Informer</a></noscript>
+  -->
   
   
 		
-				  <!--
+				
 				  <ul class="ui-tabs-nav">
-					<?php /*
+					<?php 
 					for($j=0; $j<$count1; $j++){
 					$row1=mysql_fetch_array($result);
 					$y = $j+2;
@@ -134,12 +146,19 @@ Powered by <a href="http://feed.informer.com/">RSS Feed Informer</a></noscript>
 					<div id="fragment-<?php echo $l; ?>" class="ui-tabs-panel ui-tabs-hide" style="">
 						<img src="images/profiles/<?php echo $row2["profilePhoto"];?>" alt="artist profile photo" width="400px" height="250px"/>
 						 <div class="info" >
-							<h2><a href="#" >Get To Know <?php echo $row2["stageName"];?></a></h2>
+							<h2><a href="#" >Get To Know " <?php echo $row2["stageName"];?> " </a></h2>
 							<p><?php echo $row2["bio"];?>....<a href="#" onclick="show(<?php echo $row2["userid"];?>)">read more</a></p>
 						 </div>
 					</div>
-					<?php } */?>
-				-->	
+					<?php } ?>
+			
+				</div>
+				<br />
+				
+				<div id="featured" > <!-- RSS-->
+				<script type="text/javascript" src="http://feed.informer.com/widgets/WEMVSSRSUF.js"></script>
+				<noscript><a href="http://feed.informer.com/widgets/WEMVSSRSUF.html">"Caribbean Surge RSS feed"</a>
+				Powered by <a href="http://feed.informer.com/">RSS Feed Informer</a></noscript>
 				</div>
 			
 			</div>
