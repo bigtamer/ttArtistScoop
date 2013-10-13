@@ -155,12 +155,15 @@ $count3=mysql_num_rows($result2);
 				</div>
 				<br />
 				
-				<div id="featured" > <!-- RSS-->
+				<div id="featured" > 
+				
+				</div>
+			
+				<div id="RSS" > <!-- RSS-->
 				<script type="text/javascript" src="http://feed.informer.com/widgets/WEMVSSRSUF.js"></script>
 				<noscript><a href="http://feed.informer.com/widgets/WEMVSSRSUF.html">"Caribbean Surge RSS feed"</a>
 				Powered by <a href="http://feed.informer.com/">RSS Feed Informer</a></noscript>
 				</div>
-			
 			</div>
 		    
 		
